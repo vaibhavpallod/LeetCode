@@ -1,0 +1,36 @@
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& num) {
+        // int arr[num.size()]={-1};
+        vector<vector<int>> ret;
+        for(int i=0;i<num.size()-2;i++){
+            
+            
+            
+            for(int j=i+1;j<num.size()-1;j++){
+                auto itr=find(num.begin(),num.end(),(num[i]+num[j])*(-1) );
+                int dis=distance(num.begin(),itr) ;
+                while((dis==i||dis==j)&&itr!=num.end() )
+                {
+                    itr=find(++itr,num.end(),(num[i]+num[j])*(-1) );
+                    dis=distance(num.begin(),itr) ;
+                }
+                if( itr !=num.end() ) 
+                {
+                    vector<int> v;
+                    v.push_back(num[i]);
+                    v.push_back(num[j]);
+                    v.push_back(*itr);
+                    cout<<num[i]<<" "<<num[j]<<" "<<*itr<<endl;
+          
+                    ret.push_back(v);
+                    // j--;
+                }
+            }
+
+        }
+        
+        return ret;
+        
+    }
+};
