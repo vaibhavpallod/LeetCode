@@ -1,0 +1,39 @@
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+        cout<<"\n";
+        int size=nums.size()-1;
+        if(nums.size()==1)
+        return 0;
+        int jums=0;
+        int maxj=nums[0];
+        
+          
+        for(int i=0;i<size;i++){
+            int maxcango = nums[i];
+            int maxx=0;
+            int pos=i;
+            jums++;
+            
+            if(pos>=size)
+                return jums;
+            
+            
+            for(int j=i+1;j<=i+maxcango;j++){
+               
+                if(j>=size)
+                    return jums;
+                if(maxx<j+nums[j]){
+                   maxx=j+nums[j];
+                   pos=j;
+               }
+                
+            }
+            
+            i=pos-1;
+           
+        }
+       
+        return jums;
+    }
+};
