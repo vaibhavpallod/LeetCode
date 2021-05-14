@@ -1,0 +1,66 @@
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        vector<int> vec;
+        int hsize=matrix[0].size(),vsize=matrix.size();
+        int i=0,j=0,maxx=hsize*vsize,total=0;
+        int top=0,right=hsize,bottom=vsize,left=-1;
+
+        for(int k=0;k<(max(vsize,hsize)/2)+1;k++){
+            
+            while(j<right){
+                vec.push_back(matrix[i][j]);
+                cout<<matrix[i][j++]<<" ";  
+                total++;
+            }
+            i++;j--;
+            right--;
+            
+            if(total>=maxx)
+            return vec;
+            
+            while(i<bottom){
+                vec.push_back(matrix[i][j]);
+                total++;
+
+                cout<<matrix[i++][j]<<" ";
+            }
+            j--;i--;
+            bottom--;
+
+            if(total>=maxx)
+            return vec;
+            
+            while(j>left){
+                vec.push_back(matrix[i][j]);
+                total++;
+
+            cout<<matrix[i][j--]<<"l ";
+
+            }
+            i--;++j;
+            left++;
+
+            if(total>=maxx)
+            return vec;
+
+            while(i>top){
+                vec.push_back(matrix[i][j]);
+                cout<<matrix[i--][j]<<" ";
+                total++;
+            }
+            j++;i++;
+            top++;
+            
+            if(total>=maxx)
+            return vec;
+
+        }
+        
+        
+        
+        
+        return vec;
+        
+    }
+};
