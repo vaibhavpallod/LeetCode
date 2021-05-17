@@ -1,0 +1,70 @@
+class Solution {
+public:
+    vector<vector<int>> generateMatrix(int n) {
+        vector<int> f(n,0);
+         vector< vector<int>> vec(n,f);
+        int hsize=n,vsize=n;
+        int i=0,j=0,maxx=hsize*vsize,total=0;
+        int top=0,right=n,bottom=n,left=-1;
+        
+        
+        int counter=1;
+        for(int k=0;k<n;k++){
+            
+            while(j<right){
+                vec[i][j]=(counter++);
+                // cout<<matrix[i][j++]<<" ";  
+                j++;
+                total++;
+            }
+            i++;j--;
+            right--;
+            
+            if(total>=maxx)
+            return vec;
+            
+            while(i<bottom){
+                vec[i][j]=(counter++);
+                total++;
+                i++;
+                // cout<<matrix[i++][j]<<" ";
+            }
+            j--;i--;
+            bottom--;
+
+            if(total>=maxx)
+            return vec;
+            
+            while(j>left){                
+                vec[i][j]=(counter++);
+                j--;
+                // vec.push_back(matrix[i][j]);
+                total++;
+
+            // cout<<matrix[i][j--]<<"l ";
+
+            }
+            i--;++j;
+            left++;
+
+            if(total>=maxx)
+            return vec;
+
+            while(i>top){
+                vec[i][j]=(counter++);
+                i--;
+                // cout<<matrix[i--][j]<<" ";
+                total++;
+            }
+            j++;i++;
+            top++;
+            
+            if(total>=maxx)
+            return vec;
+
+        }
+        
+        return vec;
+        
+    }
+};
