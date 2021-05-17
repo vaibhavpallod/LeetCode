@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int lengthOfLastWord(string s) {
+        
+        char *carr;       
+        carr=&s[0];
+        
+        char *token=strtok(carr," "),*prev;
+        if(token==NULL)
+        return 0;
+        
+        while(token!=NULL){
+            prev=token;
+            token=strtok(NULL," ");
+            
+        }
+        
+        //sizeof(prev)/sizeof(prev[0])
+        if(prev!=NULL)
+        return strlen(prev);
+        else
+            return 0;
+    }
+};
