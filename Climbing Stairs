@@ -1,0 +1,25 @@
+class Solution {
+public:
+    
+    int count=0;
+    int get(int n,vector<int> &arr){
+        
+        if(n>=0 && arr[n]!=0)
+            return arr[n];
+        if(n==0)
+            return 1;
+        else if(n<0)
+            return 0;
+        
+        arr[n]=get(n-1,arr)+get(n-2,arr);
+       
+        return arr[n];
+    }
+    
+    
+    int climbStairs(int n) {
+        
+        vector<int> arr(n+2,0);
+        return get(n,arr);
+    }
+};
