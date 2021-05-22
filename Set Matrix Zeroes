@@ -1,0 +1,66 @@
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& mat) {
+        int vs=mat.size();
+        int hs=mat[0].size();
+        unordered_map<int,bool> row,col;
+        vector<pair<int,int>>  vec;
+        
+        
+        for(int i=0;i<vs;i++){
+           
+            for(int j=0;j<hs;j++){
+                
+                if(mat[i][j]==0){
+                row.insert({i,true});
+                col.insert({j,true});
+
+                }
+            }
+            
+            
+        }
+        
+         for(int i=0;i<vs;i++){
+           
+            for(int j=0;j<hs;j++){
+                
+             if(row[i] == true || col[j] == true)
+                    mat[i][j] = 0;
+            
+            }
+            
+            
+        }
+        
+        
+        
+//         for(auto x:row){
+            
+//             fill(mat[x].begin(),mat[x].end(),0);
+            
+            
+// //             if(!row[x.first]){
+// //             fill(mat[x.first].begin(),mat[x.first].end(),0);
+// //             row[x.first]=true;
+// //             }
+            
+// //             if(!col[x.second]){
+// //             for(int i=0;i<vs;i++){
+// //                 mat[i][x.second]=0;
+// //             }
+// //             col[x.second]=true;
+// //             }
+//             // cout<<x.first<<" "<<x.second<<endl;
+            
+//         }
+        
+//         for(auto x:col){
+//            for(int i=0;i<vs;i++){
+//                 mat[i][x]=0;
+//             }
+
+//         }
+        
+    }
+};
