@@ -1,0 +1,37 @@
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& mat, int target) {
+         int vs=mat.size();
+        int hs=mat[0].size();
+        int row=-1;
+      
+        if(vs>1){
+        for(int i=0;i<vs;i++){
+                if(mat[i][0]>target){
+                    row=i-1;
+                    break;
+                }else if(mat[i][0]>=target){
+                    row=i;
+                    break;
+                }
+            }      
+        }
+        else{
+            row=0;
+        }
+        
+        if(find(mat[vs-1].begin(),mat[vs-1].end(),target)!=mat[vs-1].end()){
+        return true;
+        }
+        
+        if(row==-1)
+        return false;
+        
+        if(find(mat[row].begin(),mat[row].end(),target)!=mat[row].end()){
+        return true;}
+        else{
+          return false;
+        }
+        return false;
+    }
+};
