@@ -1,0 +1,33 @@
+class Solution {
+public:
+    
+    
+    
+    void make(int n,int l,int ml,vector<int> &temp,vector<vector<int>> &vec,vector<int>& nums){
+        
+        if(temp.size()==ml){
+        vec.push_back(temp);
+        return ;
+        }
+        
+        
+        for(int i=ml+1;i<=n;i++){
+            
+            for(int j=l;j<n;j++){            
+                temp.push_back(nums[j]);
+                make(n,j+1,i,temp,vec,nums);
+                temp.pop_back();
+            }
+        }
+        
+    }
+     
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>> ret;
+        vector<int> temp;
+        ret.push_back(temp);
+        make(nums.size(),0,-1,temp,ret,nums);
+        
+        return ret;
+    }
+};        
