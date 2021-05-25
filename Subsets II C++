@@ -1,0 +1,34 @@
+class Solution {
+public:
+    
+    
+    void solve(vector<int> num,vector<vector<int>> &vec,vector<int> &temp,int l){
+        if(find(vec.begin(),vec.end(),temp)==vec.end())
+        vec.push_back(temp);
+        if(temp.size()==num.size() || l>=num.size() )
+            return;
+        
+        for(int i=l;i<num.size();i++){
+            
+            temp.push_back(num[i]);
+            solve(num,vec,temp,i+1);
+            temp.pop_back();
+            
+        }
+        
+        
+        
+    }
+    
+    
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        vector<vector<int>> vec;
+        vector<int> temp;
+        sort(nums.begin(),nums.end());
+            
+        solve(nums,vec,temp,0);
+        
+        
+     return vec;   
+    }
+};
