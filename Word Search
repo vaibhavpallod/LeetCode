@@ -1,0 +1,82 @@
+class Solution {
+public:
+    bool glob=false;
+    
+    bool solve(vector<vector<char>>& board, string word,int i,int j,int l){
+     
+        if(l==word.length()-1){
+            cout<<"RETURNED"<<endl;
+            glob=true;
+            return true;
+        }
+        cout<<i<<" "<<j<<endl;
+        char ch=board[i][j];
+        board[i][j]='#';
+        if(j<board[i].size()-1 && board[i][j+1]!='#' && board[i][j+1]==word[l+1]){
+             solve(board,word,i,j+1,l+1);
+        }
+        if(j>0 && board[i][j-1]!='#' && board[i][j-1]==word[l+1]){
+             solve(board,word,i,j-1,l+1);
+        }
+        if(i<board.size()-1 && board[i+1][j]!='#' && board[i+1][j]==word[l+1]){
+             solve(board,word,i+1,j,l+1);
+        }
+        if(i>0 && board[i-1][j]!='#' && board[i-1][j]==word[l+1]){
+             solve(board,word,i-1,j,l+1);
+        }
+        
+        // if(ch != word[l]){
+        //       return false; // do not match
+        // }
+        // cout<<ch<<endl;
+        board[i][j]=ch;
+        
+        return false;
+        
+    }
+    
+    
+    
+    bool exist(vector<vector<char>>& board, string word) {
+        set<char> s,w;
+        for(auto x:board){
+            for(auto y:x){
+                s.insert(y);
+            }
+        }
+        
+        for(auto x:word){    
+            w.insert(x);
+        }
+        
+        for(auto x:w){
+            
+            if(s.find(x)==s.end())
+                return false;
+            
+        }
+        
+    for(int i=0;i<board.size();i++){
+        
+        for(int j=0;j<board[i].size();j++){
+            
+            if(board[i][j]==word[0]){
+                cout<<"main\t"<<i<< " "<<j<<endl;
+                glob=false;
+                solve(board,word,i,j,0);
+                if(glob){
+                    cout<<"FOUND\n";
+                    return true;
+                }
+            }   
+        }
+        
+        
+    }    
+        
+        
+        return false;
+        
+        
+    }
+};
