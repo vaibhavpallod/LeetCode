@@ -1,0 +1,29 @@
+
+class Solution {
+public:
+    
+    bool issym(TreeNode* l,TreeNode* r){
+        
+        if(!l && !r)
+            return true;
+        else if(!l || !r)
+            return false;
+        
+        if(l->val !=r->val )
+            return false;
+            
+        return issym(l->left,r->right) && issym(l->right,r->left);
+        
+        
+        
+        
+        
+    }
+    
+    
+    bool isSymmetric(TreeNode* root) {
+        
+        
+        return issym(root,root);
+    }
+};
