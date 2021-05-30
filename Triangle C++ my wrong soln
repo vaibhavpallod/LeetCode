@@ -1,0 +1,43 @@
+class Solution {
+public:
+    
+    int arr[200][200]={};
+    
+    int x=0;
+    int getTotal(vector<vector<int>> t,int l,int total,int &maxx,int past){
+        // cout<<x++<<endl;
+        cout<<l<<" "<<past<<" "<<total<<endl;
+        
+        if(l==t.size()-1){
+            maxx=min(maxx,total);
+            return total;
+        }
+         
+        if(arr[l][past]!=0){
+            cout<<"ARR "<<arr[l][past]<<" total"<< total<<endl;
+            return arr[l][past];
+        }
+        
+        if(past==t[l+1].size()){
+            cout<<"PAST "<<past<<" "<<t[l+1].size()<<endl;
+            return 0;
+       
+       }
+        
+        
+        return arr[l][past]=min(getTotal(t,l+1,total+t[l+1][past],maxx,past),                                          getTotal(t,l+1,total+t[l+1][past+1],maxx,past+1));
+        
+        
+    }
+    
+    
+    
+    int minimumTotal(vector<vector<int>>& t) {
+        
+        int maxx=INT_MAX;
+        // cout<<t.size()<<endl;
+        int x=getTotal(t,0,t[0][0],maxx,0);
+        cout<<"ANSWER"<<x<<endl<<endl<<endl;
+        return maxx;
+    }
+};
