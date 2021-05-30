@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int maxProfit(vector<int>& p) {
+        int maxp=0; 
+        int minsofar=p[0];
+        
+        for(int i=1;i<p.size();i++){
+            
+            maxp=max(maxp,p[i]-minsofar);
+            
+            minsofar=min(minsofar,p[i]);
+            
+        }
+        
+        return maxp;
+    }
+};
