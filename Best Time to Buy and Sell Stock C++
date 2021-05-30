@@ -1,17 +1,29 @@
 class Solution {
 public:
-    int maxProfit(vector<int>& p) {
-        int maxp=0; 
-        int minsofar=p[0];
+    
+    int arr[200][200]={};
+    
+    int getTotal(vector<vector<int>> &t,int l,int past){
         
-        for(int i=1;i<p.size();i++){
-            
-            maxp=max(maxp,p[i]-minsofar);
-            
-            minsofar=min(minsofar,p[i]);
-            
+        if(l==t.size()){
+            return 0;
         }
+         
+        if(arr[l][past]!=0){
+            return arr[l][past];
+        }
+
+        return arr[l][past]=min(getTotal(t,l+1,past),                                            getTotal(t,l+1,past+1))+t[l][past];
         
-        return maxp;
+        
+    }
+    
+    
+    
+    int minimumTotal(vector<vector<int>>& t) {
+        
+        int maxx=INT_MAX;
+        
+        return getTotal(t,0,0);
     }
 };
