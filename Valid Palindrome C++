@@ -1,0 +1,22 @@
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        int i=0,j=s.length()-1;
+        int len = s.length();
+
+        while(i<j){
+            while(i<len &&!(isalpha(s[i++]) || isdigit(s[i-1])));
+            while(j>=0 && !(isalpha(s[j--]) || isdigit(s[j+1])) );
+            if(i==len || j==-1)
+                return true;
+            char a=tolower(s[--i]);
+            char b=tolower(s[++j]);
+
+            if(tolower(a)!=tolower(b))
+                return false;
+            i++;j--;
+            
+        }
+        return true;
+    }
+};
