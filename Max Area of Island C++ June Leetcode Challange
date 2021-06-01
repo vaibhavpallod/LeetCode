@@ -1,0 +1,50 @@
+class Solution {
+public:
+    
+    void dfs(vector<vector<int>>& g,int x,int y,int &m){
+        if( (x>g.size()-1 || y>g[x].size()-1 || x<0 || y<0) ){
+            return ;
+        }
+        
+        if(g[x][y]==0 ||g[x][y]==-1 ){
+            return ;
+        }
+
+        g[x][y]=-1;
+        ++m;
+        
+        
+        if(( (x+1) <= g.size()-1 && y<=g[x].size()-1 && ( x+1)>=0 && y>=0) && g[x+1][y]==1)
+            dfs(g,x+1,y,m);   
+         if(((x-1 )<=g.size()-1 && y<=g[x].size()-1 && (x-1)>=0 && y>=0) &&  g[x-1][y]==1)
+            dfs(g,x-1,y,m);
+        if((x <= g.size()-1 && (y+1)<=g[x].size()-1 && x>=0 && (y+1)>=0) &&  g[x][y+1]==1)
+            dfs(g,x,y+1,m);
+        if((x <= g.size()-1 && (y-1)<=g[x].size()-1 && x>=0 && (y-1)>=0) &&  g[x][y-1]==1)
+            dfs(g,x,y-1,m);
+        
+        
+    }
+    
+    
+    int maxAreaOfIsland(vector<vector<int>>& g) {
+        int maxx=0;
+        for(int i=0;i<g.size();i++){
+            
+            
+            for(int j=0;j<g[i].size();j++){
+                
+                if(g[i][j]==1){
+                    int m=0;
+                    dfs(g,i,j,m);
+                    maxx= max(m,maxx); 
+                }
+                
+            }
+            
+        }
+        
+        
+       return maxx; 
+    }
+};
