@@ -1,0 +1,115 @@
+class Solution {
+public:
+    int p,q;
+    bool allX(vector<vector<char>>& b,int i,int j){
+        
+        if(b[i-1][j]=='O'){
+            p=i-1;q=j;
+            return false;
+        }
+        
+        if(b[i+1][j]=='O'){
+            p=i+1;q=j;
+            return false;
+        }
+        
+        if(b[i][j-1]=='O'){
+            p=i;q=j-1;
+           return false;
+        }
+        
+        if(b[i][j+1]=='O'){
+            p=i;q=j+1;
+            return false;
+        }
+        
+        
+        return true;
+    }
+    
+    bool need =false;
+    void doDFS(vector<vector<char>>& b,int x,int y,map<int,int> &m){
+        cout<<x<<" "<<y<<endl;
+        if((x>= b[x].size()-1 || y>=b.size()-1 || x<=0 || y<=0) && b[x][y]=='O' ){
+            need=true;
+            return;
+        
+        }
+        b[x][y]='#';
+        m.insert({x,y});
+        
+        if((x < b[x].size() || y < b.size() || x >= 0 || y>=0) && b[x-1][y]=='O')         
+            doDFS(b,x-1,y,m);
+         if((x < b[x].size() || y < b.size() || x >= 0 || y>=0) && b[x+1][y]=='O')
+            doDFS(b,x+1,y,m);
+        if((x < b[x].size() || y < b.size() || x >= 0 || y>=0) && b[x][y-1]=='O')         
+            doDFS(b,x,y-1,m);
+        if((x < b[x].size() || y < b.size() || x >= 0 || y>=0) && b[x][y+1]=='O')
+            doDFS(b,x,y+1,m);
+        
+    }
+    
+    
+    void solve(vector<vector<char>>& b) {
+        // cout<<endl;
+        for(int i=1;i<b.size()-1;i++){
+            
+            
+            for(int j=1;j<b[i].size()-1;j++){
+                
+                if(b[i][j]=='O'){
+                    bool allx=allX(b,i,j);
+                    cout<<i<<" j "<<j;
+
+                    int x,y;
+                    if(allx)
+                    {   
+                        cout<<i<<" "<<j<<"ALLX\n";
+                        b[i][j]='X';
+                        continue;
+                    }
+                    cout<<" DFS in "<<p<<" "<<q<<endl;
+                    map<int,int> m;
+                    need=false;
+                    doDFS(b,i,j,m);
+                    if(need)
+                    for(auto x:m){
+                        b[x.first][x.second] = 'O';
+                    }
+        
+                    // cout<<"OUT\n";
+//                     if(!isCorner){
+//                         b[i][j]='X';    
+                        
+//                     }
+                    
+                    
+                } 
+                
+                
+                
+            }
+            
+            
+            
+        }
+    
+            for(int i=1;i<b.size()-1;i++){
+                for(int j=1;j<b[i].size()-1;j++){
+                    if(b[i][j]=='#')
+                        b[i][j]='X';
+                }
+            }    
+    }
+};/*
+ if(b[i-1][j]=='X'){
+                        continue;
+                    }else if(b[i+1][j]=='X'){
+                        continue;
+                    }else if(b[i][j-1]=='X'){
+                        continue;
+                    }else if(b[i][j+1]=='X'){
+                        continue;
+                    }
+
+*/
