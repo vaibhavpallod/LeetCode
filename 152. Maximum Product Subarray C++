@@ -1,0 +1,57 @@
+class Solution {
+public:
+    int maxProduct(vector<int>& n) {
+        // map<long,pair<int,int>,greater<long>> m;
+        set<long,greater<long>> m;
+        // vector<long> vec;
+        int cur=n[0],p=n[0],neg=n[0];
+        int mul=1;
+        bool pos=false,zero=false;
+        
+        for(int i=1;i<n.size();i++){
+            cout<<"P "<<p<<" N "<<neg<<endl;
+            cur = n[i];
+            
+            if(n[i] == 0){
+                zero=true;
+                m.insert(p);
+                // vec.push_back(p);
+                p=1;
+                neg=1;
+                continue;
+            }
+            
+            if(n[i]<0){
+                
+                if((neg * cur) >0){
+                    p = max(cur,max(p*cur,neg*cur));
+                    m.insert(p);
+                    neg*=-1;
+                }else{
+                    m.insert(p);
+                    // vec.push_back(p);
+                    neg = min(cur,min(p*cur,neg*cur));
+                }
+                
+                p=1;                
+                
+                continue;
+            }
+            pos=true;
+            p = max(cur,max(p*cur,neg*cur));
+            neg = min(min(cur,min(p*cur,neg*cur)),neg);
+            
+            
+                  
+            
+        }
+        
+        m.insert(p);
+        // vec.push_back(p);
+        // sort(vec.begin(),vec.end(),greater<long>());
+        int x= ((pos==false && zero==true)) ? 0:*m.begin();
+        cout<<p<<"\t"<<x<<endl;
+        
+        return x;
+    }
+};
