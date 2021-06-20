@@ -1,0 +1,43 @@
+ 
+        ListNode *tempa=headA,*tempb=headB;
+        int cnta=0,cntb=0;
+        
+        while(headA){
+            headA=headA->next;
+            cnta++;
+        }
+        
+        while(headB){
+            headB=headB->next;
+        cntb++;
+        }
+        
+        int diff= abs(cnta-cntb);
+        
+        
+        if(cnta>cntb){
+            while((cnta-- - cntb)){
+                tempa=tempa->next;
+            }
+        }else if(cnta<cntb){
+            while((cntb-- - cnta)){
+                tempb=tempb->next;
+            }
+        }
+        
+        while(tempa!=NULL && tempb!=NULL){
+            
+            if(tempa==tempb)
+                return tempa;            
+                
+            tempa=tempa->next;
+            
+            tempb=tempb->next;
+
+            
+        }
+        
+        
+        
+        return NULL;
+        
