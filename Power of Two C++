@@ -1,0 +1,27 @@
+SOLN 1:
+
+if(n==1)
+            return true;
+        
+        if(n==2)
+            return true;
+        
+        if(n%2==1 || n==0)
+            return false;
+        
+        bool x = isPowerOfTwo(n/2);
+        
+        return x;
+        
+        
+        
+SOLN 2:
+     string str = bitset<32> (n).to_string();
+        int cnt=0;
+        for(int i=0;i<32;i++){
+            if(str[i]=='1')
+            cnt++;
+            
+        }
+                
+  return (cnt==1 && n>0)?true:false;
