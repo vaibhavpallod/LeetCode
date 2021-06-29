@@ -1,0 +1,30 @@
+
+class Solution {
+public:
+    
+    
+    void getView(TreeNode* root,int &maxlevel,int level,vector<int> &vec){
+        
+        if(!root)
+            return;
+        
+        if(maxlevel<level){
+            vec.push_back(root->val);
+            maxlevel = level;
+        }
+        
+        getView(root->right,maxlevel,level+1,vec);
+        getView(root->left,maxlevel,level+1,vec);
+        
+        
+    }
+    
+    vector<int> rightSideView(TreeNode* root) {
+        vector<int> vec;
+        int maxx=0;
+        getView(root,maxx,1,vec);
+        
+        return vec;
+        
+    }
+};
