@@ -1,3 +1,24 @@
+
+OPTIMAL SOLUTION :-
+ int size=n.size();
+        int maxsf=n[0];
+        int maxsh = maxsf;
+        
+        
+        for(int i=1;i<size;i++){
+            maxsf += n[i];
+            if(maxsf<n[i]){
+                maxsf=n[i];
+            }
+            if(maxsh<maxsf){
+                maxsh = maxsf;
+            }
+        }
+     return maxsh;   
+     
+///////////////////////////////////////////////////////////////////////////////////////////////////
+Basic Easy Soln:-
+
 class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
