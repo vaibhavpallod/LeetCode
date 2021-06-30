@@ -1,0 +1,23 @@
+  int rangeBitwiseAnd(int left, int right) {
+        
+        int a=left;
+        
+        if(left==0 || right == 0)
+            return 0;
+        
+        int bita= log2(left)+1;
+        int bitb= log2(right)+1;
+        
+        if(bita!=bitb)
+            return 0;
+        
+        for(long i=left;i<=right;i++){
+                        
+            a= a&i;
+            if(a==0)
+                return 0;
+            
+        }
+        
+       return a; 
+    }
