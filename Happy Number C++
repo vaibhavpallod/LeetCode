@@ -1,0 +1,26 @@
+  bool isHappy(int n) {
+        
+        map<int,bool> zx;
+        string str= to_string(n);
+        
+        int sum=0;
+        while(sum!=1 && !zx[stoi(str)]){
+            sum=0;
+            zx[stoi(str)]=true;
+
+            for(int i=0;i<str.size();i++){
+            
+                sum+=pow(str[i]-'0',2);
+
+            }
+          
+            str=to_string(sum);
+       
+        }
+        
+        if(sum==1)
+            return true;
+        else
+            return false;
+        
+    }
