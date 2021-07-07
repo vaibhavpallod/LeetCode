@@ -1,0 +1,63 @@
+incomplete soln
+
+class Solution {
+public:
+    
+    int mainl=0;
+    vector<string> s;
+    int calwords(string text){
+        int i=0,cnt=0;
+        while(i<text.size()){
+            
+            while((i<text.size())&& text[i]==' '){
+                i++;
+                cout<<i<<"\t";
+            }
+            
+            
+            string str;
+            // if()
+            // i--;
+            while((i<text.size()) && isalpha(text[i])){
+                str+=text[i++];
+                
+            }
+            cout<<str<<endl;
+            if(!str.empty()){
+            cnt++;
+                s.push_back(str);
+            mainl+=str.size();
+            }
+        }
+        
+        return cnt;
+    }
+    
+    
+    string reorderSpaces(string text) {
+        string str;
+        int len=text.size();
+        string spaces(20, ' ');
+        int cnt=calwords(text);
+        int rem = len-mainl;
+        if(cnt==1){
+        
+            str+=s[cnt-1];
+                             
+            str+=spaces.substr(0,text.size()-str.size());
+            
+            return str;
+        
+        }
+        int space=rem/(cnt-1);
+        
+        for(int i=0;i<s.size()-1;i++){
+            str+=s[i]+spaces.substr(0,space);
+        }
+        str+=s[cnt-1];
+                         
+        str+=spaces.substr(0,text.size()-str.size());
+        
+        return str;
+    }
+};
