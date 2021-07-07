@@ -1,0 +1,60 @@
+class Solution {
+public:
+    vector<string> fullJustify(vector<string>& w, int maxw) {
+        vector<string> ret;
+        int lim=0,st=0;
+         string spaces(20, ' ');
+
+        for(int i=0;i<w.size();i++){
+            
+            lim+=w[i].size()+1;
+            vector<int> vec(w.size(),0);
+            if(i==(w.size()-1)){
+                
+                
+            }
+            if(((lim-1)>=maxw) || i==(w.size()-1)){
+                if((lim-1)>maxw)
+                i--;
+                int j=st,words=(i-st)==0?1+(i-st):(i-st);
+                string str;
+                vector<string> temp;
+                while(j<=i){
+                    
+                    str+=w[j++]+" ";
+                    temp.push_back(w[j-1]+" ");
+                    
+                }
+                str=str.substr(0,str.size()-1);
+                cout<<'"'<<str<<'"'<<endl;
+                lim=0;
+                st=i+1;
+                int rem=maxw-str.size();
+                // cout<<rem<<" ";
+                j=0;
+                while(rem>0){
+                    if(j==(words-1))
+                    {
+                        rem++;
+                    }
+                    else
+                    vec[j%(words)]++;
+                    rem--;
+                    j++;
+                }
+                str="";
+                j=0;
+                for(auto x:temp){
+                    str+=x+spaces.substr(0,vec[j++]);
+                }
+                cout<<str<<endl;
+                ret.push_back(str.substr(0,str.size()-1));
+                
+            }
+            
+            
+        }
+     
+        return ret;
+    }
+};
