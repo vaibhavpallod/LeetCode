@@ -1,0 +1,38 @@
+
+class Solution {
+public:
+    
+    
+    void paths(TreeNode* root,vector<int> &v,vector<string> &s){
+        
+        v.push_back(root->val);
+        
+        if(!root->right && !root->left)
+        {   
+            string str;
+            for(auto x:v){
+                str += to_string(x) + "->";
+            }
+            str=str.substr(0,str.size()-2);
+            s.push_back(str);
+        }
+        
+        
+        if(root->left)
+        paths(root->left,v,s);
+        if(root->right)
+        paths(root->right,v,s);
+        
+        v.pop_back();
+        
+        
+    }
+    
+    vector<string> binaryTreePaths(TreeNode* root) {
+        vector<int> vec;
+        vector<string> vecstr;
+        paths(root,vec,vecstr);
+        
+        return vecstr;
+    }
+};
