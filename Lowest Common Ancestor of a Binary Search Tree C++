@@ -1,0 +1,63 @@
+
+Optimal Solutio:-
+
+
+    
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        
+        if(p->val< root->val && q->val < root->val ){
+            return lowestCommonAncestor(root->left,p,q);
+        }else if(p->val > root->val && q->val > root->val){
+            return lowestCommonAncestor(root->right,p,q);
+        }else{
+            return root;
+        }
+        
+    }
+    
+But why it took more time don't know ...!!!
+
+
+-------------------------------------------------
+Basic Solution:-
+class Solution {
+public:
+    
+    
+    void getp(TreeNode* root, TreeNode* p,vector<TreeNode*> &v,bool &found){
+            
+        if(found){
+            return;
+        }
+        v.push_back(root);
+        if(p==root){
+            found=true;        
+        }
+        
+        if( p->val <= root->val )
+            getp(root->left , p,v,found);
+        if( p->val >= root->val )
+            getp(root->right , p,v,found);
+        
+    }
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        bool found=false,found2=false;
+        vector< TreeNode*> v1,v2;
+        
+        getp(root,p,v1,found);
+        getp(root,q,v2,found2);
+        
+        reverse(v1.begin(),v1.end());
+        reverse(v2.begin(),v2.end());
+        for(auto x:v1){
+            
+            for(auto y: v2){
+                if(x==y)
+                    return x;
+            }
+            
+        }
+        
+       return NULL; 
+    }
+};
