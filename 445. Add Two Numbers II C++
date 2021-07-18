@@ -1,0 +1,107 @@
+
+class Solution {
+public:
+    
+    list<ListNode*> ls1,ls2;
+    
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode *mainl1=l1,*mainl2=l2;
+        while(l1){
+            ls1.push_front(l1);
+            l1=l1->next;
+        }
+        
+        while(l2){
+            ls2.push_front(l2);
+            l2=l2->next;
+        }
+
+        if(ls1.size()>=ls2.size()){
+
+            auto it=ls2.begin();
+            bool car=false;
+            for(auto x:ls1){
+                
+                if(it!=ls2.end()){
+                    int add=car==false?x->val+(*it)->val:x->val+(*it)->val+1;
+                    
+                    if(add>9){
+                        add%=10;
+                        car=true;
+                    }else{
+                        car=false;
+                    }
+                    
+                    x->val=add;    
+                    it++;
+                    
+                }else if(car){
+                    int add=car==false?x->val:x->val+1;
+                    
+                    if(add>9){
+                        add%=10;
+                        car=true;
+                    }else{
+                        car=false;
+                    }
+                    
+                    x->val=add;    
+                    
+                }
+                
+            }
+            
+            if(car){
+                ListNode *ne = new ListNode(1);
+                ne->next = mainl1;
+                return ne;
+            }
+            
+        return mainl1;
+            
+            
+        }else{
+            auto it=ls1.begin();
+            bool car=false;
+            for(auto x:ls2){
+                
+                if(it!=ls1.end()){
+                    int add=car==false?x->val+(*it)->val:x->val+(*it)->val+1;
+                    
+                    if(add>9){
+                        add%=10;
+                        car=true;
+                    }else{
+                        car=false;
+                    }
+                    
+                    x->val=add;    
+                    it++;
+                    
+                }else if(car){
+                    int add=car==false?x->val:x->val+1;
+                    
+                    if(add>9){
+                        add%=10;
+                        car=true;
+                    }else{
+                        car=false;
+                    }
+                    
+                    x->val=add;    
+                    
+                }
+                
+            }
+             
+            if(car){
+                ListNode *ne = new ListNode(1);
+                ne->next = mainl2;
+                return ne;
+            }
+        return mainl2;
+            
+        }
+        
+    }
+};
