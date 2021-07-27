@@ -1,0 +1,14 @@
+    TreeNode* invertTree(TreeNode* node) {
+       
+    if(!node)
+    return NULL;
+    
+    invertTree(node->left);
+    invertTree(node->right);
+    
+    if(node)
+    swap(node->left,node->right);
+    
+        return node;
+        
+    }
