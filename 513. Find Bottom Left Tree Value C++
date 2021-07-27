@@ -1,0 +1,29 @@
+
+class Solution {
+public:
+    int cur=0,ret;
+    void bylvl(TreeNode* root,int lvl=0){
+        
+        if(!root)
+            return;
+        
+        if(cur==lvl)
+        {
+            ret=root->val;
+            cur=lvl+1;
+        }
+        
+        bylvl(root->left,lvl+1);
+        bylvl(root->right,lvl+1);
+        
+        
+        
+    }
+    
+    
+    int findBottomLeftValue(TreeNode* root) {
+        bylvl(root);
+        
+        return ret;
+    }
+};
