@@ -1,0 +1,35 @@
+
+class Solution {
+public:
+// Node* levelOrder(Node* root){        
+    map<int,vector<Node*>> m;
+    void right(Node* root,int lvl){
+        
+        if(!root)
+            return;
+        
+        m[lvl].push_back(root);
+        
+        right(root->left,lvl+1);
+        right(root->right,lvl+1);
+        
+    }
+    
+    Node* connect(Node* root) {
+        
+        right(root,0);
+        
+            for(auto x:m){
+                vector<Node*> vec=x.second;
+                for(auto itr=0;itr<vec.size()-1;itr++){
+                    vec[itr]->next = vec[itr+1];
+                    
+                }
+                (*vec.rbegin())->next=NULL;
+                
+            }
+            
+        return root;
+        
+    }
+};
