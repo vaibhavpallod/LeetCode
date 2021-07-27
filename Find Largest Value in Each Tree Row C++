@@ -1,0 +1,38 @@
+
+class Solution {
+public:
+    
+    struct Node{
+        
+        int data=INT_MIN;
+    };
+    map<int,Node> m;
+    
+    
+    void zxc(TreeNode* root,int &lvl){
+        
+        if(!root)
+            return;
+        
+        m[lvl].data=max(m[lvl].data,root->val);
+        
+        zxc(root->left,++lvl);
+        --lvl;
+        zxc(root->right,++lvl);
+        --lvl;
+    }
+    
+    
+    vector<int> largestValues(TreeNode* root) {
+        int lvl=0;
+        
+        zxc(root,lvl);
+        vector<int> vec;
+        for(auto x:m){
+            vec.push_back(x.second.data);
+        }
+        
+        return vec;
+        
+    }
+};
