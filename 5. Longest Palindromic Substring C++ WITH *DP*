@@ -1,0 +1,85 @@
+class Solution {
+public:
+
+/*     pair<int,int> expand(string &s,int i){
+        
+        int l=i,r=i;
+        
+        while(l>=0 && r<(s.length()) && s[l]==s[r]){
+            l--;
+            r++;
+        }
+         ++l;
+         --r;
+
+         int le=i,re=i+1;
+         
+         if((i+1)<s.length() && s[i]==s[i+1]){
+             
+
+            while(le>=0 && re<(s.length()) && s[le]==s[re]){
+                le--;
+                re++;
+            }
+             ++le;
+             --re;
+             
+             
+         }else{
+             re=-1;
+         }
+         
+         if((re-le+1)<(r-l+1))
+            return {l,r-l+1};
+         else{
+            return {le,re-le+1}; 
+         }
+    }
+*/    
+    int dp[1100][1100];
+    
+    string longestPalindrome(string &s) {
+        int size = s.size();
+        
+        for(int i=0;i<s.length()+1;i++){
+            dp[i][i]=1;
+        }
+        int maxx=1;
+        pair<int,int> p;
+        
+        for(int i=0;i<size-1;i++){
+            
+            if(s[i]==s[i+1]){
+                dp[i][i+1]=1;
+                p={i,i+1};
+            }
+        }
+        
+        for(int i=0;i<size-2;i++){
+            int cnt=0;
+
+            for(int j=2+i;j<size;j++){
+                if(s[cnt] == s[j] && dp[cnt+1][j-1]==1 ){
+                    dp[cnt][j]=1;
+                    if(maxx<=(j-(cnt))){
+                        maxx=(j-(cnt));
+                        p={(cnt),j};
+
+                    }
+                }
+                cnt++;
+            }
+            
+        }
+//         for(int i=0;i<size;i++){
+            
+//             for(int j=0;j<size;j++){
+//                 cout<<dp[i][j]<<" ";
+//             }
+            
+//             cout<<endl;
+//         }
+//         cout<<endl<<p.first<<p.second<<endl;
+        return s.substr(p.first,p.second-p.first+1);
+    }
+};
