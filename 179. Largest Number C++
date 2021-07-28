@@ -1,0 +1,31 @@
+class Solution {
+public:
+    string largestNumber(vector<int>& x) {
+    
+        
+        string ret;
+        for(int i=0;i<x.size()-1;i++){
+
+            for(int j=i+1;j<x.size();j++){
+                string str1=to_string(x[i])+to_string(x[j]);
+                string str2=to_string(x[j])+to_string(x[i]);
+                if(str1<str2)
+                    swap(x[i],x[j]);
+             }
+
+        }
+            
+            
+        for(auto y:x){
+            ret+=to_string(y);
+        }
+            
+        int i=0;
+        while(ret[i]=='0')
+            i++;
+        if(i==ret.size())
+            return "0";
+        return ret.substr(i);
+        
+    }
+};
