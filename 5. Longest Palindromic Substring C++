@@ -1,0 +1,55 @@
+class Solution {
+public:
+
+     pair<int,int> expand(string &s,int i){
+        
+        int l=i,r=i;
+        
+        while(l>=0 && r<(s.length()) && s[l]==s[r]){
+            l--;
+            r++;
+        }
+         ++l;
+         --r;
+
+         int le=i,re=i+1;
+         
+         if((i+1)<s.length() && s[i]==s[i+1]){
+             
+
+            while(le>=0 && re<(s.length()) && s[le]==s[re]){
+                le--;
+                re++;
+            }
+             ++le;
+             --re;
+             
+             
+         }else{
+             re=-1;
+         }
+         
+         if((re-le+1)<(r-l+1))
+            return {l,r-l+1};
+         else{
+            return {le,re-le+1}; 
+         }
+    }
+    
+    string longestPalindrome(string &s) {
+        int maxx=0;
+        pair<int,int> p;
+        int l=0;
+        for(int i=0;i<s.length();i++){
+            
+            p=expand(s,i);    
+            if(maxx<p.second){
+                l=p.first;
+                maxx=p.second;
+            }
+        }
+        return s.substr(l,maxx);
+    
+    
+    }
+};
