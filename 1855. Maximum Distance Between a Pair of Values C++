@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int maxDistance(vector<int>& vec1, vector<int>& vec2) {
+        
+        int i=0,j=0;
+        int size1=vec1.size();
+        int size2 = vec2.size();
+        map<int,pair<int,int>,greater<int>> m;
+        
+        while(i<size1){
+            
+            
+            while(j<size2 && vec2[j]>=vec1[i])
+                j++;
+            if(j-1>=0)
+            j--;
+            m.insert({j-i,{i,j}});
+            
+            
+            
+        }
+        
+        return (m.begin()->first);
+        
+    }
+};
