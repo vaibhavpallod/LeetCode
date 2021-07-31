@@ -1,0 +1,40 @@
+class NumMatrix {
+public:
+    
+    vector<vector<int>> mat,sum;
+    int vs,hs;
+    void calsum(){
+        for(int i=1;i<=vs;i++){
+            
+            for(int j=1;j<=hs;j++){
+                
+                sum[i][j]=sum[i-1][j]+sum[i][j-1]+mat[i-1][j-1] - sum[i-1][j-1];   
+            }
+        }
+    }
+    
+    void print(){
+        for(int i=0;i<=vs;i++){
+            
+            for(int j=0;j<=hs;j++){
+                cout<<sum[i][j]<<" ";
+                
+            }
+            cout<<endl;
+        }
+    }
+    
+    NumMatrix(vector<vector<int>>& matrix) {
+        mat=matrix;
+        vs=matrix.size();
+        hs=matrix[0].size();
+        sum.resize(vs+2,vector<int>(hs+2));
+        calsum();
+        // print();
+    }
+    
+    int sumRegion(int row1, int col1, int row2, int col2) {
+        int ret = sum[row2+1][col2+1] + sum[row1][col1] - sum[row2+1][col1] - sum[row1][col2+1]; 
+        return ret;
+    }
+};
