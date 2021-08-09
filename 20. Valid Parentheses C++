@@ -1,0 +1,40 @@
+class Solution {
+public:
+    bool isValid(string s) {
+        if(s.length()%2!=0)
+            return false;
+        string f="{[(";
+        string r="}])";
+        
+        stack<char> st;
+        queue<char> q;
+        map<char,char> m;
+        
+        m['[']=']';
+        m['(']=')';
+        m['{']='}';
+        m[']']='[';
+        m[')']='(';
+        m['}']='{';
+        
+        for(auto x:s){
+            if(f.find(x)!=string::npos)
+                st.push(x);
+            else if(st.empty()){
+                return false;
+            }else if(x!=m[st.top()]){
+                // cout<<"NOT EQUAL\n";
+                return false;
+            }
+            else
+                st.pop();
+                
+        }
+        
+        
+        if(st.size()>0)
+            return false;
+      
+        return true;
+    }
+};
