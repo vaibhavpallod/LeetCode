@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<string> stringMatching(vector<string>& words) {
+        
+        vector<string> str;
+        sort(words.begin(),words.end(),[](string s1,string s2){
+            return s1.length()<s2.length();
+        });
+    
+        int len = words.size();
+        for(int i=0;i<len-1;i++){
+            
+            for(int j=i+1;j<len;j++){
+                
+                if(words[j].find(words[i])!= string::npos){
+                    str.push_back(words[i]);
+                    break;
+                }
+            }
+            
+        }
+        
+        
+        
+        return str;
+    }
+};
