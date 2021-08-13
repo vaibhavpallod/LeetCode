@@ -1,0 +1,67 @@
+class Solution {
+public:
+    map<int,vector<int>> vec;
+    int finsum=0;
+    vector<vector<int>> arr;
+    void dfs(int n,int sum,vector<bool> &vis){
+        
+        vis[n]=true;
+        sum++;
+        
+        for(int i=0;i<vec[n].size();i++){
+            
+            if(!vis[vec[n][i]]){
+                finsum+=sum;  
+                if(arr[n][vec[n][i]] == 0)
+                    arr[n][vec[n][i]]=finsum;
+                    
+                dfs(vec[n][i],sum,vis);
+                
+            }
+            else if(arr[n][vec[n][i]] != 0)
+                cout<<n<<"\t"<<vec[n][i]<<"\t"<<arr[n][vec[n][i]]<<endl;
+        }
+                
+    }
+    
+    
+    vector<int> sumOfDistancesInTree(int n, vector<vector<int>>& edges) {
+     
+        for(auto x:edges){
+            vec[x[0]].push_back(x[1]);
+            vec[x[1]].push_back(x[0]);
+        }
+        vector<vector<int>> v2(n,vector<int>(n));
+        arr= v2;//new vector<vector<int>>(n,vector<int>(n));
+        int sum=0;
+        vector<int> sv;
+        for(int i=0;i<n;i++){
+            vector<bool> vis(n);
+            dfs(i,sum,vis);
+            sv.push_back(finsum);
+            finsum=0;
+        }
+        
+        return sv;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+      // cout<<endl;
+        // for(auto x:vec){
+        //     cout<<x.first<<"\t";
+        //     for(auto y:x.second){
+        //         cout<<y<<" ";
+        //     }
+        //     cout<<endl;
+        // }
+        // cout<<"GRAPH created\n";
