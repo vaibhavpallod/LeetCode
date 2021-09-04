@@ -1,0 +1,22 @@
+class Solution {
+public:
+    string findDifferentBinaryString(vector<string>& nums) {
+        int n = nums.size();
+        
+        for(int i=0;i<17;i++){
+            
+            string str = bitset<6>(i).to_string(),temp;
+            if(n<7)
+            temp = str.substr(6-n);
+            else{
+            string s(n-6,'0');    
+            temp = s+str;//.substr(6-n);
+            }
+            if(find(nums.begin(),nums.end(),temp) == nums.end())
+                return temp;
+        }
+        
+        
+        return "";
+    }
+};
