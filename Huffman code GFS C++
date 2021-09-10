@@ -1,0 +1,81 @@
+class Solution
+{
+    
+    struct minNode{
+        int f;
+        char data;
+        minNode *left,*right;
+        
+        
+        minNode(char data,int f){
+             left=right=NULL;
+             this->data = data;
+             this->f=f;
+        }
+        
+        
+    };
+    
+    
+    void getList(minNode *node,string s,vector<string> &ret){
+        
+        if(!node)
+        return ;
+        if(!node->left && !node->right){
+        ret.push_back(s);
+            
+            return ;
+            
+        }
+        
+        getList(node->left,s+'0',ret);
+        
+        getList(node->right,s+'1',ret);
+        
+        
+    }
+    
+	public:
+		vector<string> huffmanCodes(string s,vector<int> f,int N)
+		{
+		    vector<string> ret;
+		    auto comp = [](minNode *l,minNode *r){
+		        return l->f > r->f;
+		    };
+		    priority_queue<minNode*,vector<minNode*>,decltype(comp)> pq(comp);
+		    
+		    
+		    for(int i=0;i<s.length();i++){
+		        
+		        pq.emplace(new minNode(s[i],f[i]));
+		        
+		    }
+		    
+            while(pq.size()!=1){
+                
+                minNode *l =pq.top();
+                // cout<<temp->data<<temp->f<<endl;
+                pq.pop();
+                
+                minNode *r =pq.top();
+                // cout<<temp->data<<temp->f<<endl;
+                pq.pop();
+                
+                minNode *temp =new minNode('$',l->f + r->f);
+                
+                temp->left = l;
+                temp->right = r;
+                
+                pq.push(temp);
+                
+                
+            }
+            
+         
+            
+             getList(pq.top(),"",ret);
+            
+            return ret;
+		}
+		
+};
