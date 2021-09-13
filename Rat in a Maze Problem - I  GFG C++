@@ -1,0 +1,66 @@
+
+class Solution{
+    public:
+    
+    
+    void dfs(vector<vector<int>> &m,int &n,vector<vector<bool>> vis,vector<string> &ret,string str,int posh,int posv){
+        
+        vis[posh][posv]=true;
+        
+        if(posh==n&&posv==n){
+            ret.push_back(str);
+              vis[posh][posv]=false;
+              return;    
+        }
+        //up
+        if((posh-1)>=0 && (posv>=0) && !vis[posh-1][posv] && m[posh-1][posv])
+        {
+            str+='U';
+            dfs(m,n,vis,ret,str,posh-1,posv);
+         str.pop_back();
+         }
+          //down
+        if((posh+1)<=n && (posv>=0) && !vis[posh+1][posv] && m[posh+1][posv])
+        {
+            str+='D';
+
+            dfs(m,n,vis,ret,str,posh+1,posv);
+            str.pop_back();
+         }
+         
+          //Left
+        if((posh)>=0 && ((posv-1)>=0) && !vis[posh][posv-1] && m[posh][posv-1])
+        {
+            str+='L';
+            dfs(m,n,vis,ret,str,posh,posv-1);
+            str.pop_back();
+        }
+
+        
+        //Right
+        if((posh)>=0 && ((posv+1)<=n) && !vis[posh][posv+1] && m[posh][posv+1])
+        {
+            str+='R';
+            dfs(m,n,vis,ret,str,posh,posv+1);
+         str.pop_back();
+       }
+        
+        vis[posh][posv]=false;
+        return ;
+        
+        
+    }
+    
+    vector<string> findPath(vector<vector<int>> &m, int n) {
+        vector<string> ret;
+        // cout<<"Start\n";
+        if(m[0][0]==0 ||m[n-1][n-1]==0  )
+        return {"-1"};
+        vector<vector<bool>> vis(n,vector<bool>(n));
+        n--;
+        string str;
+        dfs(m,n,vis,ret,str,0,0);
+        sort(ret.begin(),ret.end());
+    return ret;
+    }
+};
