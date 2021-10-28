@@ -1,0 +1,51 @@
+class Solution {
+public:
+    int nextGreaterElement(int n) {
+        // 1324657981
+        // 987654321
+        //456125472
+        
+        string str = to_string(n);
+        stack<int> st;
+        
+        if(n<12)
+            return -1;
+        
+        for(int i=str.size()-1;i>=0;i--){
+            
+            if(st.empty() || (str[st.top()]-'0')<=(str[i]-'0'))
+            st.push(i);
+            else if((str[st.top()]-'0')>(str[i]-'0')){ //1 2
+                int mi = i;//, 7
+                int ref=st.top();
+                while(!st.empty()){
+                    if(str[st.top()]<str[ref] &&str[st.top()]>str[mi] )
+                    ref = st.top();
+                    
+                    st.pop();
+                    
+                }
+                
+                swap(str[mi],str[ref]);
+                if(mi<str.size()-1)
+                sort(str.begin()+mi+1,str.end());
+                int ret;
+                try{
+                    // cout<<"try\n";
+                    ret = stoi(str);                
+                }catch(...){
+                    return -1;
+                }
+
+                return ret;
+            }
+            
+        }
+        
+        
+        
+        
+        return -1;
+        
+    }
+};
