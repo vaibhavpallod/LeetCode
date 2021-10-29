@@ -1,0 +1,49 @@
+    /**
+     * Definition for singly-linked list.
+     * struct ListNode {
+     *     int val;
+     *     ListNode *next;
+     *     ListNode() : val(0), next(nullptr) {}
+     *     ListNode(int x) : val(x), next(nullptr) {}
+     *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+     * };
+     */
+// #define ppi pair<int,pair<int,ListNode*>>;
+
+class Solution {
+public:
+        
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+    ListNode* ret=new ListNode();
+    ListNode* list=ret;
+    priority_queue<pair<int,ListNode*>,vector<pair<int,ListNode*>>,greater<pair<int,ListNode*>>> pq;
+
+
+    for(int i=0;i<lists.size();i++){
+        if(lists[i])
+        pq.push({lists[i]->val,lists[i]});
+    }
+        
+        
+    while(!pq.empty()){
+        ListNode* temp = pq.top().second;
+        pair<int,ListNode*> tempppi = pq.top();
+        ret->next =new ListNode(temp->val);
+        ret=ret->next;
+        pq.pop();
+
+        if(temp->next){
+            pq.push({temp->next->val,temp->next});
+        }
+
+
+
+    }
+        // ret=;
+    return  list->next; 
+        
+        
+        
+        
+    }
+};
