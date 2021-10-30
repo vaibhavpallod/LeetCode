@@ -1,0 +1,56 @@
+class Solution {
+public:
+    vector<int> platesBetweenCandles(string s, vector<vector<int>>& queries) {
+        
+        int n=s.size();
+        map<int,pair<int,int>> st,rev;
+        
+        bool fnd=false;
+        int prevb=-1,pcnt=0;
+        for(int i=0;i<n;i++){
+            
+            if(s[i]=='*'){
+                pcnt++;
+                
+            }
+            else{
+                prevb=i;
+                
+            }
+            
+            st[i]={pcnt,prevb};
+            
+        }
+        pcnt=0;
+        int nextb=-1;
+        for(int i=n-1;i>=0;i--){
+            
+            if(s[i]=='*'){
+                pcnt++;
+                
+            }
+            else{
+                nextb=i;
+            }
+            
+            rev[i]={pcnt,nextb};
+            
+        }
+        
+        vector<int> vec;
+        for(auto x:queries){
+            
+            int sta = x[0];
+            int end = x[1];
+            
+            int tot = st[st[end].second].first -  st[rev[sta].second].first;
+            if(tot>0)
+            vec.push_back(tot);
+            else
+            vec.push_back(0);
+            
+        }
+        
+        return vec;
+    }
+};
