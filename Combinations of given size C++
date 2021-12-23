@@ -1,0 +1,25 @@
+ 
+    
+    void combWithGivenSum(string s,string op,int n,int index,int r){
+
+        if(index>n){
+            return;
+        }
+        
+        if(op.size()>2){
+            cout<<op<<endl;
+            return;
+        }
+                    
+        op.push_back(s[index]);
+        
+    
+        combWithGivenSum(s,op,n,index+1,r+1);
+    
+        op.pop_back();
+            
+        combWithGivenSum(s,op,n,index+1,r+1);
+        
+    }
+    
+    
