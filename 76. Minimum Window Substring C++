@@ -1,0 +1,80 @@
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        unordered_map<char,bool> checks,runtime_check;
+        unordered_map<char,int> m;
+        int dif_chars=0,l=0,r=0,i=0,tot_diff;
+        bool satisfied = false,found=false;
+        string ret = s;
+        for(auto x:t){
+            m[x]++;
+            checks[x]=true;
+        }
+        
+        tot_diff=m.size();
+        while(l<=r){
+            
+            if(!satisfied && r<s.length()){
+                if(checks[s[r++]]){
+                    r--;
+                    // cout<<s[r]<<"r\t";
+                    m[s[r]]--;
+                    if(m[s[r]]<=0 && !runtime_check[s[r]]){
+                        dif_chars++;
+                        runtime_check[s[r]]=true;
+                    }
+                    r++;
+                    if(tot_diff==dif_chars){
+                        found=true;
+                        // cout<<tot_diff<<" "<<dif_chars<<" l"<<l<<" r"<<r<<endl;
+                        if(ret.length()>(r-l)){
+                           ret = s.substr(l,r-l);
+                        }     
+                        
+                        satisfied=true;
+                    }
+                }
+                
+                
+                // r++;
+            }else{
+                
+                if(checks[s[l++]]){
+                    l--;
+                    m[s[l]]++;
+                    if(m[s[l]]<=0 && !runtime_check[s[l]]){
+                        dif_chars++;
+                        runtime_check[s[l]]=true;
+                    }else if(m[s[l]]>0){
+                        if(tot_diff==dif_chars){
+                            found=true;
+                            if(ret.length()>(r-l)){
+                               ret = s.substr(l,r-l);
+                           }     
+                            satisfied=true;
+                        }
+                        dif_chars--;
+                        runtime_check[s[l]]=false;
+                    }
+                    if(tot_diff==dif_chars){
+                        found=true;
+                        if(ret.length()>(r-l)){
+                           ret = s.substr(l,r-l);
+                        }     
+                        satisfied=true;
+                    }else if(tot_diff>dif_chars){
+                        satisfied=false;
+                    }
+                    
+                    l++;                    
+                }
+                
+            }
+            
+            
+            
+        }
+        
+        return !found?"":ret;
+    }
+};
